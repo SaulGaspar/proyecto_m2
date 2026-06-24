@@ -9,9 +9,8 @@
 <body>
   <main class="page">
     <section class="header">
-      <p class="eyebrow">Modelo de regresion</p>
       <h1>Prediccion de resistencia del concreto</h1>
-      <p class="summary">Ingresa los componentes de la mezcla para estimar <strong>concrete_compressive_strength</strong>.</p>
+      <p class="summary">Ingresa los componentes de la mezcla para estimar la resistencia a la compresion del concreto.</p>
     </section>
 
     <section class="panel">
@@ -20,7 +19,6 @@
         <label class="field">
           <span>{{ labels[feature] }}</span>
           <input type="number" step="any" name="{{ feature }}" value="{{ values[feature] }}" required>
-          <small>{{ feature }} · {{ help_text[feature] }}</small>
         </label>
         {% endfor %}
         <button type="submit">Calcular prediccion</button>
@@ -36,13 +34,6 @@
         {% else %}
           <p class="empty">Completa el formulario y calcula una prediccion.</p>
         {% endif %}
-
-        <div class="metrics">
-          <h3>Metricas del modelo</h3>
-          <p>R2 prueba: <strong>{{ '%.4f'|format(metrics.r2_test) }}</strong></p>
-          <p>MAE prueba: <strong>{{ '%.4f'|format(metrics.mae_test) }}</strong></p>
-          <p>RMSE prueba: <strong>{{ '%.4f'|format(metrics.rmse_test) }}</strong></p>
-        </div>
       </aside>
     </section>
   </main>
