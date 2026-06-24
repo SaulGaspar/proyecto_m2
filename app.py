@@ -1,6 +1,5 @@
 ﻿from flask import Flask, render_template, request
 import pickle
-import pandas as pd
 from pathlib import Path
 
 app = Flask(__name__)
@@ -56,8 +55,10 @@ def index():
         try:
             for feature in FEATURES:
                 values[feature] = float(request.form.get(feature, ''))
-            row = pd.DataFrame([values], columns=FEATURES)
+
+            row = [[values[feature] for feature in FEATURES]]
             prediction = float(pipeline.predict(row)[0])
+
         except ValueError:
             error = 'Ingresa solo valores numericos en todos los campos.'
         except Exception as exc:
