@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prediccion de Concreto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page">
+    <section class="header">
+      <p class="eyebrow">Modelo de regresion</p>
+      <h1>Prediccion de resistencia del concreto</h1>
+      <p class="summary">Ingresa los componentes de la mezcla para estimar <strong>concrete_compressive_strength</strong>.</p>
+    </section>
+
+    <section class="panel">
+      <form method="post" class="form">
+        {% for feature in features %}
+        <label class="field">
+          <span>{{ labels[feature] }}</span>
+          <input type="number" step="any" name="{{ feature }}" value="{{ values[feature] }}" required>
+          <small>{{ feature }} · {{ help_text[feature] }}</small>
+        </label>
+        {% endfor %}
+        <button type="submit">Calcular prediccion</button>
+      </form>
+
+      <aside class="result">
+        <h2>Resultado</h2>
+        {% if error %}
+          <p class="error">{{ error }}</p>
+        {% elif prediction is not none %}
+          <p class="value">{{ '%.2f'|format(prediction) }}</p>
+          <p class="unit">Resistencia estimada</p>
+        {% else %}
+          <p class="empty">Completa el formulario y calcula una prediccion.</p>
+        {% endif %}
+
+        <div class="metrics">
+          <h3>Metricas del modelo</h3>
+          <p>R2 prueba: <strong>{{ '%.4f'|format(metrics.r2_test) }}</strong></p>
+          <p>MAE prueba: <strong>{{ '%.4f'|format(metrics.mae_test) }}</strong></p>
+          <p>RMSE prueba: <strong>{{ '%.4f'|format(metrics.rmse_test) }}</strong></p>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

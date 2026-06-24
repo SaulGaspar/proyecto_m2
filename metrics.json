@@ -1,0 +1,16 @@
+{
+  "r2_test": 0.906113540415696,
+  "mae_test": 3.5680160783127826,
+  "rmse_test": 4.918574115375993,
+  "features": [
+    "cement",
+    "blast_furnace_slag",
+    "fly_ash",
+    "water",
+    "superplasticizer",
+    "coarse_aggregate",
+    "fine_aggregate",
+    "age"
+  ],
+  "target": "concrete_compressive_strength"
+}
